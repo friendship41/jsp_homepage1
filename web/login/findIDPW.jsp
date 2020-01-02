@@ -7,6 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../include/loginCheck.jsp"%>
+<%! public int getRandomNum()
+{
+    int random = 0;
+    random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+    return random;
+}%>
 <!doctype html>
 <html>
 <head>
@@ -30,18 +36,19 @@
     <article id="contents">
         <div id="post_code_wrap">
             <h1>아이디 찾기</h1>
-            <form class="post_code_form">
+            <form class="post_code_form" method="post" action="/jsp_homepage1/MailToU">
                 <div class="post_code">
-                    <label>이메일 : </label><input type="text" id="email" required autofocus size="30">
+                    <label>이메일 : </label><input type="text" name="email" required autofocus size="30">
+                    <input type="hidden" name="code" id="code" value="<%=getRandomNum()%>">
                     <input type="submit" value="검색" class="btn">
                     <br><br><br><br>
                 </div>
             </form>
             <h1>비밀번호 찾기</h1>
-            <form class="post_code_form">
+            <form class="post_code_form" method="post" action="/jsp_homepage1/MailToU">
                 <div class="post_code">
-                    <label>아이디 : </label><input type="text" id="id" required autofocus size="30"><br><br>
-                    <label>이메일 : </label><input type="text" id="emailPw" required autofocus size="30">
+                    <label>아이디 : </label><input type="text" name="id" required autofocus size="30"><br><br>
+                    <label>이메일 : </label><input type="text" name="email" required autofocus size="30">
                     <input type="submit" value="검색" class="btn">
                 </div>
             </form>

@@ -44,6 +44,8 @@
           <element id="file-copy" path="X:/4_drivers/apache_dbconnection_pool/commons-dbcp2-2.7.0.jar" />
           <element id="file-copy" path="X:/4_drivers/apache_dbconnection_pool/commons-pool2-2.8.0.jar" />
           <element id="file-copy" path="X:/4_drivers/apache_dbconnection_pool/commons-collections4-4.4.jar" />
+          <element id="file-copy" path="X:/4_drivers/jmail/mail.jar" />
+          <element id="file-copy" path="X:/4_drivers/jmail/activation.jar" />
         </element>
       </element>
     </root>
