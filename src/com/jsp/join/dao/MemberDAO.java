@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDAO
 {
@@ -269,6 +271,79 @@ public class MemberDAO
             this.disConnect(con,pstmt,rs);
         }
     }
+
+
+    public String selectEmail(String id)
+    {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try
+        {
+            con = this.getConnection();
+
+            String sql = "SELECT email FROM JAVALINE_MEMBER WHERE ID=?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+
+            if(rs.next())
+            {
+                return rs.getString("EMAIL");
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("MemberDAO/selectEmail: "+e.getMessage());
+            return null;
+        }
+        finally
+        {
+            this.disConnect(con,pstmt,rs);
+        }
+    }
+
+
+    public List<String> selectIds(String email)
+    {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<String> list = new ArrayList<>();
+
+        try
+        {
+            con = this.getConnection();
+
+            String sql = "SELECT ID FROM JAVALINE_MEMBER WHERE EMAIL=?";
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+
+            while(rs.next())
+            {
+                list.add(rs.getString("ID"));
+            }
+            return list;
+        }
+        catch (SQLException e)
+        {
+            System.out.println("MemberDAO/selectIds: "+e.getMessage());
+            return null;
+        }
+        finally
+        {
+            this.disConnect(con,pstmt,rs);
+        }
+    }
+
 
 
 }

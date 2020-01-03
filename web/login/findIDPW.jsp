@@ -49,6 +49,7 @@
                 <div class="post_code">
                     <label>아이디 : </label><input type="text" name="id" required autofocus size="30"><br><br>
                     <label>이메일 : </label><input type="text" name="email" required autofocus size="30">
+                    <input type="hidden" name="code" value="<%=getRandomNum()%>">
                     <input type="submit" value="검색" class="btn">
                 </div>
             </form>

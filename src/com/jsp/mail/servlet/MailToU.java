@@ -1,5 +1,7 @@
 package com.jsp.mail.servlet;
 
+import com.jsp.join.dao.MemberDAO;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -18,7 +20,46 @@ public class MailToU extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Properties props = System.getProperties();
+        String formEmail = request.getParameter("email");
+        String formId = request.getParameter("id");
+        String formCode = request.getParameter("code");
+        request.setAttribute("email", formEmail);
+        System.out.println("MailToU-formCode: "+formCode);
+        System.out.println("MailToU-formId: "+formId);
+        System.out.println("MailToU-formEmail: "+formEmail);
+        boolean dbCheck = false;
+
+        MemberDAO memberDAO = new MemberDAO();
+        if(formId != null && !formId.equals(""))
+        {
+            String dbEmail = memberDAO.selectEmail(formId);
+            System.out.println("MailToU-dbEmail: "+dbEmail);
+            if(dbEmail == null)
+            {
+                request.setAttribute("msg","없는 아이디 입니다..");
+                RequestDispatcher disp = request.getRequestDispatcher("/common/MsgGoBack.jsp");
+                disp.forward(request, response);
+                return;
+            }
+            else
+            {
+                if(dbEmail.equals(formEmail))
+                {
+                    System.out.println("true");
+                    dbCheck=true;
+                }
+                else
+                {
+                    request.setAttribute("msg", "잘못된 아이디 이거나 이메일입니다..");
+                    RequestDispatcher disp = request.getRequestDispatcher("/common/MsgGoBack.jsp");
+                    disp.forward(request, response);
+                    return;
+                }
+            }
+        }
+
+
+        Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.naver.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
@@ -36,27 +77,31 @@ public class MailToU extends HttpServlet
 
             msg.setFrom(from);
 
-            String email = request.getParameter("email");
 
-            InternetAddress to = new InternetAddress(email);
+            InternetAddress to = new InternetAddress(formEmail);
             msg.setRecipient(Message.RecipientType.TO, to);
 
             msg.setSubject("비밀번호 인증번호", "UTF-8");
 
-            String code = request.getParameter("code");
-            msg.setText(code, "UTF-8");
+            msg.setText(formCode, "UTF-8");
 
             msg.setHeader("content-Type", "text/html");
 
-            javax.mail.Transport.send(msg);
+            Transport.send(msg);
         }
         catch (MessagingException e)
         {
             e.printStackTrace();
         }
 
-        request.setAttribute("code", request.getParameter("code"));
-        RequestDispatcher disp = request.getRequestDispatcher("/login/findIDPW.jsp");
+        System.out.println("MailToU-code: "+formCode);
+        request.setAttribute("code", formCode);
+        if(dbCheck)
+        {
+            request.setAttribute("emailOK", "true");
+            request.setAttribute("id", formId);
+        }
+        RequestDispatcher disp = request.getRequestDispatcher("/login/confirmIDPW.jsp");
         disp.forward(request, response);
 
 
@@ -68,7 +113,7 @@ public class MailToU extends HttpServlet
 
         public MyAuthentication(){
             String id = "poo963369";
-            String pw = "####";
+            String pw = "########";     //비밀번호
 
             pa = new PasswordAuthentication(id, pw);
         }
