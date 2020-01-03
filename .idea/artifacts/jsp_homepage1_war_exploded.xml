@@ -46,6 +46,9 @@
           <element id="file-copy" path="X:/4_drivers/apache_dbconnection_pool/commons-collections4-4.4.jar" />
           <element id="file-copy" path="X:/4_drivers/jmail/mail.jar" />
           <element id="file-copy" path="X:/4_drivers/jmail/activation.jar" />
+          <element id="file-copy" path="X:/4_drivers/fileUpload/cos.jar" />
+          <element id="file-copy" path="X:/4_drivers/fileUpload/commons-io-2.6.jar" />
+          <element id="file-copy" path="X:/4_drivers/fileUpload/commons-fileupload-1.4.jar" />
         </element>
       </element>
     </root>

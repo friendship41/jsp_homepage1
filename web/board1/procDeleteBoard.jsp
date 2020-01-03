@@ -15,6 +15,7 @@
         int replyNum = board1DAO.selectReplyCount(Integer.parseInt(no));
         if(replyNum == 0)
         {
+
             board1DAO.deleteSingleBoard(Integer.parseInt(no));
         }
         else

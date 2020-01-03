@@ -67,9 +67,18 @@
                 }
             }).open();
         }
+        function phone1(inp) {
+            for(i=0 ; i<7; i++){
+                if(document.join.tel1.options[i].value === inp)
+                {
+                    document.join.tel1.options[i].selected = true;
+                    break;
+                }
+            }
+        }
     </script>
 </head>
-<body>
+<body onload="phone1('<%=vo.getTel1()%>')">
 <div id="warp">
     <!--헤더파일 들어가는 곳-->
     <%@ include file="../include/header.jsp" %>
@@ -99,8 +108,8 @@
 
                 <ul>
                     <li><label>Phone Number　</label>
-                        <select name="tel1">
-                            <option value="02">02</option>
+                        <select name="tel1" id="tel1">
+                            <option value="02" >02</option>
                             <option value="010">010</option>
                             <option value="011">011</option>
                             <option value="016">016</option>

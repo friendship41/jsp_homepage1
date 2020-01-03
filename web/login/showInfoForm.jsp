@@ -43,7 +43,7 @@
                         {
                             for(String s : list)
                             {%>
-                                <label>아이디 : </label><input type="text" name="confirmCode" required autofocus size="30" readonly value="<%=s%>">
+                                <label>아이디 : </label><input type="text" name="confirmCode" required autofocus size="30" readonly value="<%=s%>"><br>
                             <%}
                         }
                         else

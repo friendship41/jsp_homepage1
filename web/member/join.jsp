@@ -63,9 +63,7 @@
                 }
             }).open();
         }
-        function asd() {
-            console.log("asdasd")
-        }
+
     </script>
 </head>
 <body onload="asd()">
@@ -95,7 +93,6 @@
                 </ul>
             </fieldset>
             <fieldset><legend>Optional</legend>
-
                 <ul>
                     <li><label>Phone Number　</label>
                         <select name="tel1">

@@ -73,7 +73,7 @@ if(check != null)
         </table>
         <div id="box">
             <div class="board">
-                <form method="post" action="procWriteBoard1.jsp" id="gogogo" name="gogogo">
+                <form method="post" action="procWriteBoard1.jsp" id="gogogo" name="gogogo" enctype="multipart/form-data">
                     <div><label class="label">name</label><input type="text" required autofocus size="25" value="<%=vo.getName()%>" readonly name="name"></div>
                     <div><label class="label">e-mail</label><input type="email" required size="25" value="<%=vo.getEmail()%>" readonly name="email"></div>
 <%--                    <div><label class="label">password</label><input type="password" required size="10">--%>
@@ -85,8 +85,7 @@ if(check != null)
                         out.print("<div><label class=\"label\">title</label><input type=\"text\" required size=\"50\" name=\"subject\" id=\"subject\" value=\"[답글] \"></div>");
                     }%>
                     <div><label class="label">input text</label><textarea class="text_area" name="content" required id="content"></textarea></div>
-<%--                    <div><label class="label">file</label><input type="text" readonly size="70">--%>
-<%--                        <input type="button" value="찾기" class="btn"></div>--%>
+                    <div><label class="label">file</label><input type="text" readonly size="63"><input type="button" value="찾기" class="btn"></div>
 
                     <div class="board_btn">
                         <input type="hidden" value="<%=vo.getId()%>" name="writer">
